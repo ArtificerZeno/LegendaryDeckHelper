@@ -1,0 +1,33 @@
+32
+X-Force Forge,B 14
+Shield Nick Fury,R 5,B 6,G 3
+Avengers Black Window,R 9,B 5
+Avengers Captain America,R 1,Y 5,G 5,B 3
+X-Men Cyclops,U 9,G 5
+Deadpool,R 5,Y 4,B 5
+X-Men Emma Frost,R 5,Y 3,U 5,G 1
+X-Men Gambit,R 5,Y 4,U 5
+Avengers Hawkeye,Y 5,B 9
+Avengers Hulk,Y 5,G 9
+Avengers Iron Man,U 5,B 9
+X-Men Rouge,R 8,G 6
+Spider-Man,R 1,Y 5,G 5,B 3
+Avengers Thor,U 9,G 5
+X-Men Wolverine,Y 14
+X-Men,R 3,U 11
+X-Men Angel,R 5,Y 3,G 6
+X-Men Bishop,R 5,U 8,B 1
+MK Blade,R 5,Y 1,G 5,B 3
+X-Force Cable,R 3,U 6,B 5
+X-Force Colossus,R 3,G 11
+MK Daredevil,R 3,Y 6,G 5
+X-Force Domino,R 1,Y 5,B 8
+MK Elektra,R 5,Y 9
+MK Ghost Rider,U 6,G 3,B 5
+X-Men Iceman,U 11,G 3
+MK Iron Fist,Y 5,G 9
+X-Men Jean Grey,R 8,U 6
+X-Men Nightcrawler,R 6,Y 8
+X-Men Professor X,R 1,Y 5,U 8
+MK The Punisher,G 3,B 11
+X-Force,R 6,Y 5,G 3
