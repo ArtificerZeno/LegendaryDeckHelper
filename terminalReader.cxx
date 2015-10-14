@@ -10,8 +10,9 @@ int maxArg=10;
 //caller function must attach the result to pointer and free it
 char** getLine(){
   //make buffer
-  char** res=(char**)malloc(sizeof(char*)*maxArgs);
-  for(int i=0;i<maxArgs;i++){
+  char** res=(char**)malloc(sizeof(char*)*maxArg);
+  res[0]=(char*)malloc(sizeof(char*)*maxBuff);
+  for(int i=1;i<maxArg;i++){
     res[i]=NULL;
   }
   //make char storage and read counter
@@ -21,32 +22,30 @@ char** getLine(){
 
   //while loop for reading
   while(true){
-    switch (c=getchar()){
-      case '\n':
-        res[j][i]=c;
-        return res;
-      break;
-      case ' ':
-        i=0;
-        j++;
-        if(j=maxArg){
-          for(int k=0;k<maxArgs;k++){free(res[k]);}
-          free(res);
-          strcpy(res,"Error: too many Args!\n",j+1);
-          return NULL;
-        }
-        res[j]=(char*)malloc(sizeof(char)*maxBuff)
-      break;
-      default:
+    c=getchar();
+    if(c=='\n'||c=='\r'){
+      return res;
+    }
+    else if(c==' '){
+      if(j==maxArg){
+        for(int k=0;k<maxArg;k++){free(res[k]);}
+        free(res);
+        fprintf(stdout,"Terminal Error: too many Args!\n");
+        return NULL;
+      }
+      i=0;
+      j++;
+      res[j]=(char*)malloc(sizeof(char)*maxBuff);
+    }
+    else{
         if(i>=maxBuff){
-          for(int k=0;k<maxArgs;k++){free(res[k]);}
+          for(int k=0;k<maxArg;k++){free(res[k]);}
           free(res);
-          strcpy(res,"Error: Arg %d is too long!\n",j+1);
+          fprintf(stdout,"Terminal Error: Arg %d is too long!\n",j+1);
           return NULL;
         }
         res[j][i]=c;
         i++;
-      break;
     }
   }
 }
