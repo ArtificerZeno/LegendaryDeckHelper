@@ -141,9 +141,11 @@ void makeHeros(char** comm){
   //select heros
   int t=1;
   double timeout=10.0;
+  double rep=1.0;
   time_t ts=time(0);
   time_t tn=time(0);
-  while(difftime(tn,ts)<timeout){
+  double dur=difftime(tn,ts);
+  while(dur<timeout){
     int aH=0;//accepted heros
     int cV[5];//current total values
     cV[0]=cV[1]=cV[2]=cV[3]=cV[4]=0;
@@ -347,7 +349,7 @@ void makeHeros(char** comm){
       int tot=nH*14;
       fprintf(stdout,"With Y count = %d/%d, U count = %d/%d, B count %d/%d, R count = %d/%d, G count = %d/%d.\n",cV[0],tot,cV[1],tot,cV[2],tot,cV[3],tot,cV[4],tot);
       fprintf(stdout,"With Y ratio = %f, U ratio = %f, B ratio %f, R ratio = %f, G ratio = %f.\n",(float)cV[0]/(float)tot,(float)cV[1]/(float)tot,(float)cV[2]/(float)tot,(float)cV[3]/(float)tot,(float)cV[4]/(float)tot);
-      fprintf(stdout,"This took %f seconds to make and %d tries.",difftime(tn,ts),t);
+      fprintf(stdout,"This took %f seconds to make and %d tries.\n",dur,t);
       for(int i=0;i<5;i++){free(consideredHeros[i]);}
       free(consideredHeros);
       return;
@@ -355,6 +357,12 @@ void makeHeros(char** comm){
     //fprintf(stdout,"failure\n");
     t++;
     tn=time(0);
+    dur=difftime(tn,ts);
+    if(rep==dur){//for some reason this if statement prevents termination of function ;A;
+      fprintf(stdout,"%f seconds have passed and %d tries were attempted.\n",dur,t);
+      rep+=1.0;
+    }
+    fprintf(stdout,"");// this will still allow termination i don't understand ;A;
   }
   fprintf(stdout,"Failed to generate heros in %f seconds and %d tries.\n",timeout,t);
   for(int i=0;i<5;i++){free(consideredHeros[i]);}
