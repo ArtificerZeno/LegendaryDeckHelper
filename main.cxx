@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string>
+#include <ctime>
 #include "terminalReader.cxx"
 
 const char* mkHerror1="Format Error: makeHero n (-Y a)(-y a)(-U b)-u b)(-B c)(-b c)(-R d)(-r d)(-G e)(-g e)\n";
@@ -138,9 +139,11 @@ void makeHeros(char** comm){
 
   //fprintf(stdout,"selecting heros\n");
   //select heros
-  int t=100;//i have 100 tries
-  int rt=t;
-  while(t>0){
+  int t=1;
+  double timeout=10.0;
+  time_t ts=time(0);
+  time_t tn=time(0);
+  while(difftime(tn,ts)<timeout){
     int aH=0;//accepted heros
     int cV[5];//current total values
     cV[0]=cV[1]=cV[2]=cV[3]=cV[4]=0;
@@ -344,14 +347,16 @@ void makeHeros(char** comm){
       int tot=nH*14;
       fprintf(stdout,"With Y count = %d/%d, U count = %d/%d, B count %d/%d, R count = %d/%d, G count = %d/%d.\n",cV[0],tot,cV[1],tot,cV[2],tot,cV[3],tot,cV[4],tot);
       fprintf(stdout,"With Y ratio = %f, U ratio = %f, B ratio %f, R ratio = %f, G ratio = %f.\n",(float)cV[0]/(float)tot,(float)cV[1]/(float)tot,(float)cV[2]/(float)tot,(float)cV[3]/(float)tot,(float)cV[4]/(float)tot);
+      fprintf(stdout,"This took %f seconds to make and %d tries.",difftime(tn,ts),t);
       for(int i=0;i<5;i++){free(consideredHeros[i]);}
       free(consideredHeros);
       return;
     }
     //fprintf(stdout,"failure\n");
-    t--;
+    t++;
+    tn=time(0);
   }
-  fprintf(stdout,"Failed to generate heros in %d tries.\n",rt);
+  fprintf(stdout,"Failed to generate heros in %f seconds and %d tries.\n",timeout,t);
   for(int i=0;i<5;i++){free(consideredHeros[i]);}
   free(consideredHeros);
   return;
@@ -508,11 +513,11 @@ int main(){
     if(strcmp(comm[0],"t")==0){
       comm[0]="Hero";
       comm[1]="6";
-      comm[2]="1";
-      comm[3]="1";
-      comm[4]="1";
-      comm[5]="1";
-      comm[6]="1";
+      comm[2]="17";
+      comm[3]="17";
+      comm[4]="17";
+      comm[5]="17";
+      comm[6]="17";
       makeHeros(comm);
     }
     if(strcmp(comm[0],"help")==0){
